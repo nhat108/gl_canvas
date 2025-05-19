@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:gl_canvas/gl_canvas.dart';
 
 import 'factory_stub.dart'
-if (dart.library.io) 'renderer_io.dart'
-if (dart.library.html) 'renderer_web.dart';
+    if (dart.library.io) 'renderer_io.dart'
+    if (dart.library.html) 'renderer_web.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   late GLCanvasController controller;
   late CanvasRenderer renderer;
 
@@ -30,14 +28,12 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     controller = GLCanvasController();
-    renderer = createRenderer(512, 512, controller: controller);
+    // renderer = createRenderer(512, 512, controller: controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(controller, renderer),
-    );
+    return MaterialApp(home: Home(controller, renderer));
   }
 }
 
@@ -50,47 +46,43 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plugin example app'),
-      ),
+      appBar: AppBar(title: const Text('Plugin example app')),
       body: Column(
         children: [
           Row(
             children: [
               TextButton(
-                  onPressed: () {
-                    controller.beginDraw();
-                    renderer.render();
-                    controller.endDraw();
-                  },
-                  child: Text("Draw")
+                onPressed: () {
+                  controller.beginDraw();
+                  renderer.render();
+                  controller.endDraw();
+                },
+                child: Text("Draw"),
               ),
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                      return Scaffold(
-                        appBar: AppBar(
-                          title: Text("Hello"),
-                        ),
-                      );
-                    }));
-                  },
-                  child: Text("Push")
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Scaffold(appBar: AppBar(title: Text("Hello")));
+                      },
+                    ),
+                  );
+                },
+                child: Text("Push"),
               ),
             ],
           ),
           Expanded(
-              child: Center(
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  color: Colors.blue,
-                  child: GLCanvas(
-                    controller: controller,
-                  ),
-                ),
-              )
-          )
+            child: Center(
+              child: Container(
+                width: 300,
+                height: 300,
+                color: Colors.blue,
+                child: GLCanvas(controller: controller),
+              ),
+            ),
+          ),
         ],
       ),
     );
