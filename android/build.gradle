@@ -22,11 +22,11 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     namespace 'com.ero.gl_canvas'
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 25
     }
 
 
